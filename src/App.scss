@@ -1,0 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;400;500;700;800&family=Poppins:wght@100;300;400;500;600;800;900&display=swap");
+
+$main-font: "Montserrat", sans-serif;
+$secondary-font: "Poppins", sans-serif;
+$font-md: 16px;
+$font-sm: 14px;
+$font-xs: 10px;
+
+* {
+  font-family: $secondary-font;
+}
