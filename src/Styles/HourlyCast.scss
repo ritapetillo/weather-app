@@ -1,9 +1,18 @@
 .hourly-cast {
   margin-top: 40px;
   .hourly-cast__table {
-      
     div {
       padding: 5px 0;
+    }
+    span:first-child {
+      font-weight: 600;
+    }
+    img {
+      height: 35px;
+      margin: 0px 10px;
+    }
+    .hourly-cast__table-conditions {
+      font-size: 12px;
     }
   }
 }

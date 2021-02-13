@@ -1,23 +1,23 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { City } from "../Interfaces/WeeklyForeact";
 
-const useGeoLocation = (city: string) => {
-  const [coordinates, setCoordinates] = useState();
-  const fetchCoordinates = async (city: string) => {
+const useGeoLocation = (query: string) => {
+  const [city, setCity] = useState();
+  const fetchCity = async (city: string) => {
     try {
-      const res = await axios.get(
-        `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
+      const res: any = await axios.get(
+        `${process.env.REACT_APP_API_URL}?q=${query}&key=${process.env.REACT_APP_API_KEY}`
       );
-      const res_coordinates = res.data.results[0].geometry;
+      const city: any = res.data.city;
       console.log(res.data);
-      setCoordinates(res_coordinates);
+      setCity(city);
     } catch (err) {
       console.log(err);
     }
   };
 
-
-  return [coordinates, fetchCoordinates];
+  return [city, fetchCity];
 };
 
 export default useGeoLocation;

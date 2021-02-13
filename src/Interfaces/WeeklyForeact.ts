@@ -1,74 +1,41 @@
 export interface WeeklyForecast {
-  cod?: string;
-  message?: number;
-  cnt?: number;
-  list?: List[];
-  city?: City;
+  lat: number;
+  lon: number;
+  timezone: string;
+  timezone_offset: number;
+  current: Current;
+  hourly: Current[];
+  daily: Daily[];
 }
 
-export interface City {
-  id?: number;
-  name?: string;
-  coord?: Coord;
-  country?: string;
-  population?: number;
-  timezone?: number;
+export interface Current {
+  dt: number;
   sunrise?: number;
   sunset?: number;
-}
-
-export interface Coord {
-  lat?: number;
-  lon?: number;
-}
-
-export interface List {
-  dt?: number;
-  main?: MainClass;
-  weather?: Weather[];
-  clouds?: Clouds;
-  wind?: Wind;
-  visibility?: number;
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: Weather[];
   pop?: number;
-  sys?: Sys;
-  dt_txt?: Date;
   rain?: Rain;
 }
 
-export interface Clouds {
-  all?: number;
-}
-
-export interface MainClass {
-  temp?: number;
-  feels_like?: number;
-  temp_min?: number;
-  temp_max?: number;
-  pressure?: number;
-  sea_level?: number;
-  grnd_level?: number;
-  humidity?: number;
-  temp_kf?: number;
-}
-
 export interface Rain {
-  "3h"?: number;
-}
-
-export interface Sys {
-  pod?: Pod;
-}
-
-export enum Pod {
-  D = "d",
-  N = "n",
+  "1h": number;
 }
 
 export interface Weather {
-  id?: number;
-  main?: MainEnum;
-  description?: Description;
-  icon?: string;
+  id: number;
+  main: Main;
+  description: Description;
+  icon: string;
 }
 
 export enum Description {
@@ -76,17 +43,63 @@ export enum Description {
   ClearSky = "clear sky",
   FewClouds = "few clouds",
   LightRain = "light rain",
+  ModerateRain = "moderate rain",
   OvercastClouds = "overcast clouds",
   ScatteredClouds = "scattered clouds",
 }
 
-export enum MainEnum {
+export enum Main {
   Clear = "Clear",
   Clouds = "Clouds",
   Rain = "Rain",
 }
 
-export interface Wind {
-  speed?: number;
-  deg?: number;
+export interface Daily {
+  dt: number;
+  sunrise: number;
+  sunset: number;
+  temp: Temp;
+  feels_like: FeelsLike;
+  pressure: number;
+  humidity: number;
+  dew_point: number;
+  wind_speed: number;
+  wind_deg: number;
+  weather: Weather[];
+  clouds: number;
+  pop: number;
+  rain: number;
+  uvi: number;
+}
+
+export interface FeelsLike {
+  day: number;
+  night: number;
+  eve: number;
+  morn: number;
+}
+
+export interface Temp {
+  day: number;
+  min: number;
+  max: number;
+  night: number;
+  eve: number;
+  morn: number;
+}
+
+export interface City {
+  id: number;
+  name: string;
+  coord: Coord;
+  country: string;
+  population: number;
+  timezone: number;
+  sunrise: number;
+  sunset: number;
+}
+
+export interface Coord {
+  lat: number;
+  lon: number;
 }
