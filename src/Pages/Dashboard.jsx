@@ -6,8 +6,8 @@ import "../Styles/Dashboard.scss";
 const Dashboard = () => {
   return (
     <div className="dashboard">
-      <MainDash />
       <SideBar />
+      <MainDash />
     </div>
   );
 };

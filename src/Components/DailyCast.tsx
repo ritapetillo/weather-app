@@ -9,19 +9,19 @@ interface Props {
 const DailyCast = ({ day, forecast }: Props) => {
   return (
     <div className="dailycast">
-      <img
-        src={`${process.env.PUBLIC_URL}/icons/${forecast.weather[0].icon}.svg`}
-      />
+      <span>{day}</span>
       <div>
-        <span className="dailycast__max">
-          {Math.floor(forecast.temp.max)} <span>&#8451;</span>
-        </span>
+        <img
+          src={`${process.env.PUBLIC_URL}/icons/${forecast.weather[0].icon}.svg`}
+        />
+      </div>
+      <div>
+        <span className="dailycast__max">{Math.floor(forecast.temp.max)}°</span>
         <span className="dailycast__min">
           {" "}
-          {Math.floor(forecast.temp.min)} <span>&#8451;</span>
+          {Math.floor(forecast.temp.min)}°
         </span>
       </div>
-      <span>{day}</span>
     </div>
   );
 };
