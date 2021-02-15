@@ -4,6 +4,8 @@ import "../Styles/NavBar.scss";
 import { useDispatch } from "react-redux";
 import { searchResults } from "../actions/searchActions";
 import useGeoLocation from "../CustomHooks/useGeoLocation";
+import { signIn } from "../Lib/auth";
+import firebase from "../Lib/firebase";
 
 const NavBar = () => {
   const [active, setActive] = useState(false);
@@ -13,6 +15,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(searchResults("Miami"));
+    console.log(firebase.auth().currentUser);
   }, []);
 
   const handleSearch = async () => {
@@ -21,6 +24,14 @@ const NavBar = () => {
       dispatch(searchResults(city));
       setCoordinates(city);
       console.log(coordinates);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleLogin = async () => {
+    try {
+      const login = await signIn();
+      console.log(login);
     } catch (err) {
       console.log(err);
     }
@@ -51,7 +62,12 @@ const NavBar = () => {
       );
     }
   }, [active, city]);
-  return <div className="navBar">{navbar}</div>;
+  return (
+    <div className="navBar">
+      {navbar}
+      <div onClick={handleLogin}>LOGIN</div>
+    </div>
+  );
 };
 
 export default NavBar;
