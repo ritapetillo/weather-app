@@ -4,7 +4,6 @@ import {
   SEARCH_FAIL,
   SEARCH_SUCCESS,
   SEARCH_LOADING,
-  SEARCH_CITY,
 } from "./types";
 import { WeeklyForecast } from "../Interfaces/WeeklyForeact";
 
@@ -17,18 +16,25 @@ export const searchResults = (search: string) => async (
     dispatch({
       type: SEARCH_LOADING,
     });
-    const res_city = await axios.get(
+<<<<<<< Updated upstream
+    const res = await axios.get(
       `${process.env.REACT_APP_API_URL}?q=${search}&appid=${process.env.REACT_APP_API_KEY}`
+=======
+    const res_city = await axios.get(
+      `${process.env.REACT_APP_API_URI}?q=${search}`
+>>>>>>> Stashed changes
     );
-    const city = await res_city.data.city;
+    console.log(res);
 
     dispatch({
-      type: SEARCH_CITY,
-      payload: city,
+      type: SEARCH_SUCCESS,
+      payload: res.data,
     });
+<<<<<<< Updated upstream
+=======
     if (city) {
       const res_weather = await axios.get(
-        `${process.env.REACT_APP_API_URI}lat=${city.coord.lat}&lon=${city.coord.lon}&&units=metric&appid=${process.env.REACT_APP_API_KEY}`
+        `${process.env.REACT_APP_API_URI}/full?lat=${city.coord.lat}&lon=${city.coord.lon}`
       );
 
       dispatch({
@@ -36,6 +42,7 @@ export const searchResults = (search: string) => async (
         payload: res_weather.data,
       });
     }
+>>>>>>> Stashed changes
   } catch (err) {
     dispatch({
       type: SEARCH_FAIL,

@@ -1,30 +1,73 @@
 import React, { useEffect, useMemo, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "../Styles/NavBar.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../actions/searchActions";
 import useGeoLocation from "../CustomHooks/useGeoLocation";
+<<<<<<< Updated upstream
+=======
+import { signIn, signInAxios } from "../Lib/auth";
+import firebase from "../Lib/firebase";
+import ModalLogin from "./ModaLoginl";
+import { SettingsPhoneTwoTone } from "@material-ui/icons";
+// import useGeoLocation from "react-ipgeolocation";
+import useGeoIp from "usegeoip";
+import { getCurrentUser } from "../actions/authActions";
+>>>>>>> Stashed changes
 
 const NavBar = () => {
   const [active, setActive] = useState(false);
-  const [city, setCity] = useState("");
+  const [searchCity, setCity] = useState("");
   const dispatch = useDispatch();
   const [coordinates, setCoordinates] = useGeoLocation("");
+  const [show, setShow] = useState(false);
+  const { city, countryCode } = useGeoIp();
+  const user = useSelector((state) => state.user.user.user);
 
   useEffect(() => {
+<<<<<<< Updated upstream
     dispatch(searchResults("Miami"));
+=======
+    dispatch(getCurrentUser());
+    console.log(user);
+>>>>>>> Stashed changes
   }, []);
+
+  useEffect(() => {
+    dispatch(searchResults(city));
+    // console.log(firebase.auth().currentUser);
+    console.log(user);
+  }, [city]);
 
   const handleSearch = async () => {
     try {
-      console.log(city);
-      dispatch(searchResults(city));
-      setCoordinates(city);
-      console.log(coordinates);
+      console.log(searchCity);
+      dispatch(searchResults(searchCity));
+      setCoordinates(searchCity);
     } catch (err) {
       console.log(err);
     }
   };
+<<<<<<< Updated upstream
+=======
+
+  const handleClose = () => setShow(false);
+  const handleOpen = () => {
+    setShow(true);
+  };
+  // const handleLogin = async () => {
+  //   try {
+  //     // const login = await signIn();
+  //     const login = await signIn();
+  //     const loginaxios = await signInAxios(login.additionalUserInfo.profile);
+  //     console.log(login);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const handleLogin = () => {};
+>>>>>>> Stashed changes
   const navbar = useMemo(() => {
     if (!active) {
       return (
@@ -39,10 +82,9 @@ const NavBar = () => {
             <SearchIcon onClick={() => setActive(!active)} />
             <input
               type="text"
-              value={city}
+              value={searchCity}
               onChange={(e) => {
                 setCity(e.target.value);
-                console.log(city);
               }}
             />
             <span onClick={handleSearch}>Search</span>
@@ -51,7 +93,27 @@ const NavBar = () => {
       );
     }
   }, [active, city]);
+<<<<<<< Updated upstream
   return <div className="navBar">{navbar}</div>;
+=======
+  return (
+    <div className="navBar">
+      {navbar}
+      <ModalLogin show={show} handleClose={handleClose} />
+      {user ? (
+        <>
+          {" "}
+          <div onClick={handleOpen}>
+            {" "}
+            Hi {user.firstName} <span className="ml-3">LOGOUT</span>
+          </div>
+        </>
+      ) : (
+        <div onClick={handleOpen}>LOGIN</div>
+      )}
+    </div>
+  );
+>>>>>>> Stashed changes
 };
 
 export default NavBar;
