@@ -2,15 +2,22 @@ import React, { useMemo } from "react";
 import moment from "moment";
 import "../Styles/Today.scss";
 import sun from "../Assets/icons/svg/045-sun.svg";
+import { Current } from "../Interfaces/WeeklyForeact";
 
-const Today = () => {
+interface Props {
+  current: Current;
+}
+
+const Today = ({ current }: Props) => {
   const weatherIcon = useMemo(() => {
     return sun;
   }, []);
   return (
     <div className="today">
       <div>
-        <img src={weatherIcon} alt="" />
+        <img
+          src={`${process.env.PUBLIC_URL}/icons/${current.weather[0].icon}.svg`}
+        />{" "}
       </div>
       <div>
         <h4>Today</h4>

@@ -4,17 +4,11 @@ import NavBar from "./NavBar";
 import WeeklyCast from "./WeeklyCast";
 
 const MainDash = () => {
-
-  useEffect(() => {
-    
-    
-  },[])
+  useEffect(() => {}, []);
   return (
     <div className="maindash">
       <NavBar />
-      <h2>
-        Wheather <span>Foreacast</span>
-      </h2>
+      <h4>Weekly</h4>
       {/* component city */}
 
       <WeeklyCast />

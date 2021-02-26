@@ -7,24 +7,27 @@ import HourlyCast from "./HourlyCast";
 import { useSelector } from "react-redux";
 import { RootStore } from "../store";
 import { ISearchState } from "../reducers/searchReducer";
-import { WeeklyForecast, City } from "../Interfaces/WeeklyForeact";
+import { City, WeeklyForecast } from "../Interfaces/WeeklyForeact";
 
 const SideBar = () => {
   const search: ISearchState = useSelector((state: RootStore) => state.search);
   const results: any = useSelector((state: RootStore) => state.search.results);
+  const city: City | "" = useSelector((state: RootStore) => state.search.city);
 
   useEffect(() => {
-    console.log(results.city);
+    console.log(city);
   }, [results]);
   return (
     <div className="sidebar">
-      {results.city && (
+      {city && results.hourly ? (
         <>
           <div className="sidebar__top"></div>
-          <Today />
-          <Temparature city={results.city} todayWeather={results.list[0]} />
-          <HourlyCast />
+          <Today current={results.current} />
+          <Temparature city={city} current={results.current} />
+          <HourlyCast hourly={results.hourly} timezone={results.timezone} />
         </>
+      ) : (
+        ""
       )}
     </div>
   );

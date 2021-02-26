@@ -4,8 +4,6 @@ import "../Styles/NavBar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../actions/searchActions";
 import useGeoLocation from "../CustomHooks/useGeoLocation";
-<<<<<<< Updated upstream
-=======
 import { signIn, signInAxios } from "../Lib/auth";
 import firebase from "../Lib/firebase";
 import ModalLogin from "./ModaLoginl";
@@ -13,7 +11,8 @@ import { SettingsPhoneTwoTone } from "@material-ui/icons";
 // import useGeoLocation from "react-ipgeolocation";
 import useGeoIp from "usegeoip";
 import { getCurrentUser } from "../actions/authActions";
->>>>>>> Stashed changes
+// import { signIn } from "../Lib/auth";
+// import firebase from "../Lib/firebase";
 
 const NavBar = () => {
   const [active, setActive] = useState(false);
@@ -25,16 +24,13 @@ const NavBar = () => {
   const user = useSelector((state) => state.user.user.user);
 
   useEffect(() => {
-<<<<<<< Updated upstream
-    dispatch(searchResults("Miami"));
-=======
     dispatch(getCurrentUser());
     console.log(user);
->>>>>>> Stashed changes
   }, []);
 
   useEffect(() => {
     dispatch(searchResults(city));
+    console.log(city);
     // console.log(firebase.auth().currentUser);
     console.log(user);
   }, [city]);
@@ -48,8 +44,6 @@ const NavBar = () => {
       console.log(err);
     }
   };
-<<<<<<< Updated upstream
-=======
 
   const handleClose = () => setShow(false);
   const handleOpen = () => {
@@ -66,8 +60,6 @@ const NavBar = () => {
   //   }
   // };
 
-  const handleLogin = () => {};
->>>>>>> Stashed changes
   const navbar = useMemo(() => {
     if (!active) {
       return (
@@ -93,9 +85,7 @@ const NavBar = () => {
       );
     }
   }, [active, city]);
-<<<<<<< Updated upstream
-  return <div className="navBar">{navbar}</div>;
-=======
+
   return (
     <div className="navBar">
       {navbar}
@@ -113,7 +103,6 @@ const NavBar = () => {
       )}
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default NavBar;

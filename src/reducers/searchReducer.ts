@@ -3,19 +3,22 @@ import {
   SEARCH_FAIL,
   SEARCH_SUCCESS,
   SEARCH_LOADING,
+  SEARCH_CITY,
 } from "../actions/types";
-import { WeeklyForecast } from "../Interfaces/WeeklyForeact";
+import { WeeklyForecast, City } from "../Interfaces/WeeklyForeact";
 
 export interface ISearchState {
   loading: boolean;
   results: WeeklyForecast | {};
   error_msg?: string;
+  city: City | "";
 }
 
 const defaultState: ISearchState = {
   loading: false,
   results: {},
   error_msg: "",
+  city: "",
 };
 
 const searchReducer = (
@@ -28,6 +31,13 @@ const searchReducer = (
         ...state,
         loading: false,
         results: action.payload,
+        error_msg: "",
+      };
+    case SEARCH_CITY:
+      return {
+        ...state,
+        loading: false,
+        city: action.payload,
         error_msg: "",
       };
     case SEARCH_LOADING:
