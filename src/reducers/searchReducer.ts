@@ -9,7 +9,7 @@ import { WeeklyForecast, City } from "../Interfaces/WeeklyForeact";
 
 export interface ISearchState {
   loading: boolean;
-  results: WeeklyForecast | {};
+  results: WeeklyForecast | any;
   error_msg?: string;
   city: City | "";
 }

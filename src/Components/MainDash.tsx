@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import "../Styles/Maindash.scss";
+import Highlights from "./Highlights";
 import NavBar from "./NavBar";
 import WeeklyCast from "./WeeklyCast";
 
@@ -12,6 +14,7 @@ const MainDash = () => {
       {/* component city */}
 
       <WeeklyCast />
+      <Highlights />
     </div>
   );
 };

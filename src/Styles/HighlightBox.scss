@@ -1,0 +1,16 @@
+.highlightBox {
+  height: 160px;
+  text-align: center;
+  border: 1px solid rgb(235, 240, 240);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.863);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+  img {
+    height: 50px;
+    margin-bottom: 5px;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "../Styles/NavBar.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,18 +11,20 @@ import { SettingsPhoneTwoTone } from "@material-ui/icons";
 // import useGeoLocation from "react-ipgeolocation";
 import useGeoIp from "usegeoip";
 import { getCurrentUser } from "../actions/authActions";
+import useConvertedTime from "../CustomHooks/useConvertedTime";
 // import { signIn } from "../Lib/auth";
 // import firebase from "../Lib/firebase";
 
 const NavBar = () => {
   const [active, setActive] = useState(false);
-  const [searchCity, setCity] = useState("");
+  const [searchCity, setSearchCity] = useState("");
   const dispatch = useDispatch();
   const [coordinates, setCoordinates] = useGeoLocation("");
   const [show, setShow] = useState(false);
   const { city, countryCode } = useGeoIp();
   const user = useSelector((state) => state.user.user.user);
 
+  const cityToSearch = useRef();
   useEffect(() => {
     dispatch(getCurrentUser());
     console.log(user);
@@ -30,16 +32,12 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(searchResults(city));
-    console.log(city);
-    // console.log(firebase.auth().currentUser);
-    console.log(user);
   }, [city]);
 
   const handleSearch = async () => {
     try {
-      console.log(searchCity);
-      dispatch(searchResults(searchCity));
-      setCoordinates(searchCity);
+      dispatch(searchResults(cityToSearch.current.value));
+      setCoordinates(cityToSearch.current.value);
     } catch (err) {
       console.log(err);
     }
@@ -74,9 +72,10 @@ const NavBar = () => {
             <SearchIcon onClick={() => setActive(!active)} />
             <input
               type="text"
-              value={searchCity}
+              ref={cityToSearch}
               onChange={(e) => {
-                setCity(e.target.value);
+                console.log(e.target.value);
+                setSearchCity(e.target.value);
               }}
             />
             <span onClick={handleSearch}>Search</span>
