@@ -8,4 +8,38 @@
   background: rgba($color: #ffffff, $alpha: 1);
   border-radius: 0 20px 20px 0;
   min-width: 350px;
+
+  @media (max-width: 500px) {
+    flex: 1;
+  }
+
+  .favorite {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 10px;
+    justify-self: flex-end;
+    align-self: flex-end;
+    padding: 0px 10px;
+    position: relative;
+    cursor: pointer;
+    svg {
+      cursor: pointer;
+      font-size: 30px;
+    }
+    span {
+      display: none;
+    }
+
+    &:hover {
+      span {
+        display: block;
+        position: absolute;
+        bottom: -35px;
+        right: 0;
+      }
+    }
+  }
 }

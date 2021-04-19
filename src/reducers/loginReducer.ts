@@ -3,18 +3,24 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGIN_LOADING,
+  LOGOUT,
+  GET_FAVORITES,
 } from "../actions/types";
 
 export interface ISearchState {
   loading: boolean;
   user: any | {};
   error_msg?: string;
+  isAuth: boolean;
+  favoriteCities: [];
 }
 
 const defaultState: ISearchState = {
   loading: false,
   user: {},
   error_msg: "",
+  isAuth: false,
+  favoriteCities: [],
 };
 
 const loginReducer = (
@@ -28,6 +34,7 @@ const loginReducer = (
         loading: false,
         user: action.payload,
         error_msg: "",
+        isAuth: true,
       };
 
     case LOGIN_LOADING:
@@ -44,6 +51,18 @@ const loginReducer = (
         loading: false,
         error_msg: "There are no results for this research",
       };
+    case LOGOUT:
+      return {
+        ...state,
+        user: {},
+        isAuth: false,
+      };
+    case GET_FAVORITES:
+      return {
+        ...state,
+        favoriteCities: action.payload,
+      };
+
     default:
       return state;
   }

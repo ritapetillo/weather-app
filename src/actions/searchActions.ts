@@ -16,22 +16,12 @@ export const searchResults = (search: string) => async (
     dispatch({
       type: SEARCH_LOADING,
     });
-<<<<<<< Updated upstream
-    const res = await axios.get(
-      `${process.env.REACT_APP_API_URL}?q=${search}&appid=${process.env.REACT_APP_API_KEY}`
-=======
+
     const res_city = await axios.get(
       `${process.env.REACT_APP_API_URI}?q=${search}`
->>>>>>> Stashed changes
     );
-    console.log(res);
-
-    dispatch({
-      type: SEARCH_SUCCESS,
-      payload: res.data,
-    });
-<<<<<<< Updated upstream
-=======
+const city = res_city.data.city
+console.log(res_city)
     if (city) {
       const res_weather = await axios.get(
         `${process.env.REACT_APP_API_URI}/full?lat=${city.coord.lat}&lon=${city.coord.lon}`
@@ -42,7 +32,7 @@ export const searchResults = (search: string) => async (
         payload: res_weather.data,
       });
     }
->>>>>>> Stashed changes
+
   } catch (err) {
     dispatch({
       type: SEARCH_FAIL,

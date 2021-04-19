@@ -1,55 +1,54 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import "../Styles/NavBar.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { searchResults } from "../actions/searchActions";
 import useGeoLocation from "../CustomHooks/useGeoLocation";
-<<<<<<< Updated upstream
-=======
 import { signIn, signInAxios } from "../Lib/auth";
 import firebase from "../Lib/firebase";
 import ModalLogin from "./ModaLoginl";
 import { SettingsPhoneTwoTone } from "@material-ui/icons";
 // import useGeoLocation from "react-ipgeolocation";
 import useGeoIp from "usegeoip";
-import { getCurrentUser } from "../actions/authActions";
->>>>>>> Stashed changes
+import {
+  getCurrentUser,
+  getFavoriteCities,
+  logoOut,
+} from "../actions/authActions";
+import useConvertedTime from "../CustomHooks/useConvertedTime";
+import { useHistory } from "react-router-dom";
+
+// import { signIn } from "../Lib/auth";
+// import firebase from "../Lib/firebase";
 
 const NavBar = () => {
   const [active, setActive] = useState(false);
-  const [searchCity, setCity] = useState("");
+  const [searchCity, setSearchCity] = useState("");
   const dispatch = useDispatch();
   const [coordinates, setCoordinates] = useGeoLocation("");
   const [show, setShow] = useState(false);
   const { city, countryCode } = useGeoIp();
   const user = useSelector((state) => state.user.user.user);
-
+  const history = useHistory();
+  const cityToSearch = useRef();
   useEffect(() => {
-<<<<<<< Updated upstream
-    dispatch(searchResults("Miami"));
-=======
     dispatch(getCurrentUser());
+    dispatch(getFavoriteCities());
     console.log(user);
->>>>>>> Stashed changes
   }, []);
 
   useEffect(() => {
     dispatch(searchResults(city));
-    // console.log(firebase.auth().currentUser);
-    console.log(user);
   }, [city]);
 
   const handleSearch = async () => {
     try {
-      console.log(searchCity);
-      dispatch(searchResults(searchCity));
-      setCoordinates(searchCity);
+      dispatch(searchResults(cityToSearch.current.value));
+      setCoordinates(cityToSearch.current.value);
     } catch (err) {
       console.log(err);
     }
   };
-<<<<<<< Updated upstream
-=======
 
   const handleClose = () => setShow(false);
   const handleOpen = () => {
@@ -66,8 +65,6 @@ const NavBar = () => {
   //   }
   // };
 
-  const handleLogin = () => {};
->>>>>>> Stashed changes
   const navbar = useMemo(() => {
     if (!active) {
       return (
@@ -82,9 +79,10 @@ const NavBar = () => {
             <SearchIcon onClick={() => setActive(!active)} />
             <input
               type="text"
-              value={searchCity}
+              ref={cityToSearch}
               onChange={(e) => {
-                setCity(e.target.value);
+                console.log(e.target.value);
+                setSearchCity(e.target.value);
               }}
             />
             <span onClick={handleSearch}>Search</span>
@@ -93,9 +91,7 @@ const NavBar = () => {
       );
     }
   }, [active, city]);
-<<<<<<< Updated upstream
-  return <div className="navBar">{navbar}</div>;
-=======
+
   return (
     <div className="navBar">
       {navbar}
@@ -103,17 +99,29 @@ const NavBar = () => {
       {user ? (
         <>
           {" "}
-          <div onClick={handleOpen}>
+          <div>
             {" "}
-            Hi {user.firstName} <span className="ml-3">LOGOUT</span>
+            Hi {user.firstName}{" "}
+            <span
+              className="auth_button"
+              className="ml-3 auth_button auth_logout"
+              onClick={() => {
+                setShow(false);
+                dispatch(logoOut());
+                history.push("/");
+              }}
+            >
+              LOGOUT
+            </span>
           </div>
         </>
       ) : (
-        <div onClick={handleOpen}>LOGIN</div>
+        <div className="auth_button" onClick={() => handleOpen()}>
+          LOGIN
+        </div>
       )}
     </div>
   );
->>>>>>> Stashed changes
 };
 
 export default NavBar;
