@@ -26,10 +26,9 @@ const SideBar = () => {
   );
   const [added, setAdded] = useState(false);
   useEffect(() => {
-    console.log(city);
-    console.log(favorites);
+  
     if (city) {
-      const isAdded = favorites.some((fav) => fav === city.name);
+      const isAdded = favorites?.some((fav) => fav === city.name);
       setAdded(isAdded);
     }
   }, [results]);

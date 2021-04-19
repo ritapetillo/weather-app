@@ -34,10 +34,10 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(getCurrentUser());
     dispatch(getFavoriteCities());
-    console.log(user);
   }, []);
 
   useEffect(() => {
+    console.log(city)
     dispatch(searchResults(city));
   }, [city]);
 
