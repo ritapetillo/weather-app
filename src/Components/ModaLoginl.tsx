@@ -62,7 +62,7 @@ const ModalLogin = ({ show, handleClose }: Props) => {
             Submit
           </button>
           <button type="submit" className="btn btn-secondary btn-block">
-            <a href="http://localhost:3001/api/users/google">
+            <a href={`${REACT_APP_API_AUTH}/google`}>
               Login with Google
             </a>
           </button>
