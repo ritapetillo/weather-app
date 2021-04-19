@@ -16,6 +16,7 @@ const ModalLogin = ({ show, handleClose }: Props) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     dispatch(loginAction(email, pass));
+    handleClose();
   };
   return (
     <Modal show={show} onHide={handleClose}>

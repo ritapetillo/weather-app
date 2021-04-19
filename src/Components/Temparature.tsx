@@ -3,6 +3,8 @@ import moment from "moment";
 import "../Styles/Temperature.scss";
 import { City, Current } from "../Interfaces/WeeklyForeact";
 import { ProgressBar } from "react-bootstrap";
+import AddIcon from "@material-ui/icons/Add";
+
 interface Props {
   city: City;
   current: Current;
@@ -16,10 +18,8 @@ const Temparature = ({ city, current }: Props) => {
           <h1>
             {Math.round(current?.temp)} <span>&#8451;</span>
           </h1>
-          <h4>{city.name}</h4>
-          <span>
-            Feels like {current?.feels_like} • Humidity:{current?.humidity}
-          </span>
+          <h3 className="d-flex">{city.name}</h3>
+          <span>Feels like {current?.feels_like}</span>
           {current.uvi && current.uvi > 0 && (
             <ProgressBar
               variant="warning"

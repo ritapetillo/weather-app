@@ -30,15 +30,14 @@ export const searchResults = (search: string) => async (
 
     if (city) {
       const res_weather = await axios.get(
-        `${process.env.REACT_APP_API_URI}/full?lat=${city.coord.lat}&lon=${city.coord.lon}`)
-
+        `${process.env.REACT_APP_API_URI}/full?lat=${city.coord.lat}&lon=${city.coord.lon}`
+      );
 
       dispatch({
         type: SEARCH_SUCCESS,
         payload: res_weather.data,
       });
     }
-
   } catch (err) {
     dispatch({
       type: SEARCH_FAIL,

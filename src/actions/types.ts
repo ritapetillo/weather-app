@@ -7,7 +7,8 @@ export const SEARCH_CITY = "SEARCH_CITY";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_LOADING = "LOGIN_LOADING";
 export const LOGIN_FAIL = "LOGIN_FAIL";
-
+export const LOGOUT = "LOGOUT";
+export const GET_FAVORITES = "GET_FAVORITES";
 
 export interface SearchResult {
   id: number;
@@ -15,8 +16,6 @@ export interface SearchResult {
   cover: string;
   artist: string;
 }
-
-
 
 //LOGIN
 export interface LoginLoading {
@@ -29,8 +28,16 @@ export interface LoginSuccess {
 export interface LoginFail {
   type: typeof LOGIN_FAIL;
 }
-//SEARCH
 
+export interface Logout {
+  type: typeof LOGOUT;
+}
+
+export interface GetFavorites {
+  type: typeof GET_FAVORITES;
+  payload: [];
+}
+//SEARCH
 
 export interface SearchLoading {
   type: typeof SEARCH_LOADING;
@@ -47,12 +54,15 @@ export interface SearchFail {
   type: typeof SEARCH_FAIL;
 }
 
-
 export type SearchDispachTypes =
   | SearchLoading
   | SearchSuccess
   | SearchFail
   | SearchCity;
 
-
-export type LoginDispachTypes = LoginLoading | LoginSuccess | LoginFail;
+export type LoginDispachTypes =
+  | LoginLoading
+  | LoginSuccess
+  | LoginFail
+  | Logout
+  | GetFavorites;

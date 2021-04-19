@@ -10,8 +10,14 @@ import ModalLogin from "./ModaLoginl";
 import { SettingsPhoneTwoTone } from "@material-ui/icons";
 // import useGeoLocation from "react-ipgeolocation";
 import useGeoIp from "usegeoip";
-import { getCurrentUser } from "../actions/authActions";
+import {
+  getCurrentUser,
+  getFavoriteCities,
+  logoOut,
+} from "../actions/authActions";
 import useConvertedTime from "../CustomHooks/useConvertedTime";
+import { useHistory } from "react-router-dom";
+
 // import { signIn } from "../Lib/auth";
 // import firebase from "../Lib/firebase";
 
@@ -23,10 +29,11 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const { city, countryCode } = useGeoIp();
   const user = useSelector((state) => state.user.user.user);
-
+  const history = useHistory();
   const cityToSearch = useRef();
   useEffect(() => {
     dispatch(getCurrentUser());
+    dispatch(getFavoriteCities());
     console.log(user);
   }, []);
 
@@ -92,13 +99,26 @@ const NavBar = () => {
       {user ? (
         <>
           {" "}
-          <div onClick={handleOpen}>
+          <div>
             {" "}
-            Hi {user.firstName} <span className="ml-3">LOGOUT</span>
+            Hi {user.firstName}{" "}
+            <span
+              className="auth_button"
+              className="ml-3 auth_button auth_logout"
+              onClick={() => {
+                setShow(false);
+                dispatch(logoOut());
+                history.push("/");
+              }}
+            >
+              LOGOUT
+            </span>
           </div>
         </>
       ) : (
-        <div onClick={handleOpen}>LOGIN</div>
+        <div className="auth_button" onClick={() => handleOpen()}>
+          LOGIN
+        </div>
       )}
     </div>
   );
