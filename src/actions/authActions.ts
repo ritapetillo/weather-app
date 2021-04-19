@@ -120,7 +120,7 @@ export const getFavoriteCities = () => async (
       type: GET_FAVORITES,
       payload: favCities,
     });
-    console.log(favCities);
+    // console.log(favCities);
   } catch (err) {
     dispatch({
       type: LOGIN_FAIL,

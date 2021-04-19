@@ -28,7 +28,7 @@ const SideBar = () => {
   useEffect(() => {
   
     if (city) {
-      const isAdded = favorites?.some((fav) => fav === city.name);
+      const isAdded = favorites && favorites?.some((fav) => fav === city.name);
       setAdded(isAdded);
     }
   }, [results]);

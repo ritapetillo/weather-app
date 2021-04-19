@@ -38,7 +38,7 @@ const NavBar = () => {
 
   useEffect(() => {
     console.log(city)
-    dispatch(searchResults(city));
+    dispatch(searchResults('Miami'));
   }, [city]);
 
   const handleSearch = async () => {
